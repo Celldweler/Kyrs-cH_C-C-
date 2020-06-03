@@ -14,7 +14,7 @@ int Check_Number()
 	return choice;
 }
 
-void Data_Input(vector<Product>& product, int number, int password)
+void Data_Input(vector<Product>& product, int number, int password) //Ввод данных, и заполнение полей экземпляра БД структуры Product
 {
 	std::cout << "Запишите данные..." << "\n";
 	std::cout << "\n";
@@ -56,7 +56,7 @@ void Data_Input(vector<Product>& product, int number, int password)
 	int choice = Check_Number();
 	if (choice == 1)
 	{
-		Save(product, number, password);
+		Save(product, number, password); //Загрузка во внешний файл
 	}
 	else if (choice == 2)
 	{
@@ -64,7 +64,7 @@ void Data_Input(vector<Product>& product, int number, int password)
 	}
 }
 
-void New_Data_Input(vector<Product>& product2, int number, int password)
+void New_Data_Input(vector<Product>& product2, int number, int password) // Ввод новых данных в БД
 {
 	std::cout << "Запишите данные..." << "\n";
 	std::cout << "\n";
@@ -100,7 +100,7 @@ void New_Data_Input(vector<Product>& product2, int number, int password)
 	}
 }
 
-void Save(vector<Product>& product, int number, int password)
+void Save(vector<Product>& product, int number, int password) // функция записи данных  в файл
 {
 	std::cout << "Сохранение в файл. Введите имя существующего или будущего файла..." << "\n";
 	std::string name;
@@ -142,7 +142,7 @@ void Save(vector<Product>& product, int number, int password)
 	menu(product, number, password);
 }
 
-void Data_Read(vector<Product>& product, int number, int password)
+void Data_Read(vector<Product>& product, int number, int password) //Считывание данных со внешнего файла
 {
 
 	std::cout << "Введите название файла." << "\n" << "\n";
