@@ -23,7 +23,7 @@
 	г) удаление всех записей с указанной ценой за единицу;
  */
 using namespace std;
-struct Product
+struct Product  //Экземпляр базы данных, структура содержащяя 8 полей, и метод вывода данных
 {
 	std::string ShopName, Address, VendorCode, ProductName, enter;
 
@@ -60,10 +60,10 @@ struct Product
 		std::cout << "\n";
 	};
 };
-int Check_Number();
-void menu(vector<Product>& product, int number, int password);
-void Save(vector<Product>& product, int number, int password);
-void Data_Read(vector<Product>& product, int number, int password);
+int Check_Number();  //Функция-Валидатор пользовательского ввота числовых значений
+void menu(vector<Product>& product, int number, int password); // Пользовательское меню БД
+void Save(vector<Product>& product, int number, int password); //Функция сохранения данных во внешний файл
+void Data_Read(vector<Product>& product, int number, int password); // Чтение данных с внешнего фалйа
 void Data_product(vector<Product>& product, int number, int password);
 void Amount_price(vector<Product>& product, int number, int password);
 void Show_store(vector<Product>& product, int number, int password);
