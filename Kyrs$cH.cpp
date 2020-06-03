@@ -13,6 +13,68 @@ int Check_Number()
 	}
 	return choice;
 }
+class PassGen 
+{
+public:
+    string filename;
+    void displayMessage()
+    {
+        int passLenght;
+        int numOfPasswords;
+
+        cout << "Введите длину пароля для генерации: ";
+        cin >> passLenght;
+        cout << "Введите количество паролей для генерации: ";
+        cin >> numOfPasswords;
+        cout << "Будет сгенерировано паролей: " << numOfPasswords << "." << endl;
+        cout << endl;
+        cout << "Введите имя файла для записи: ";
+        cin >> filename;
+
+        std::ofstream outFile(filename+".txt", ios::out);
+
+        for (int k = 0; k < numOfPasswords; k++) {
+            for (int i = 0; i < passLenght; ++i) {
+                numOfChars(passLenght);
+                passGenerator(passLenght);
+                outFile << password[i];
+            }
+            outFile << endl;
+        }
+        outFile.close();
+
+        cout << "Пароль успешно сгенерированы и записан в файл " << filename << "" << endl;
+    }
+
+    void passGenerator(int passLenght)
+    {
+        password = new char[passLenght];
+
+        for (int i = 0; i < numOfNumbers; ++i) {
+            password[i] = char(rand() % 10 + 48);
+        }
+        for (int i = numOfNumbers; i < numOfNumbers + numOfBigChars; ++i) {
+            password[i] = char(rand() % 26 + 65);
+        }
+        for (int i = numOfNumbers + numOfBigChars; i < passLenght; ++i) {
+            password[i] = char(rand() % 26 + 97);
+        }
+        std::random_shuffle(password, password + passLenght);
+    }
+
+    void numOfChars(int passLenght)
+    {
+        numOfSmallChars = rand() % passLenght;
+        int charRandEnd = passLenght - numOfSmallChars;
+        numOfBigChars = rand() % charRandEnd;
+        numOfNumbers = passLenght - numOfSmallChars - numOfBigChars;
+    }
+
+    int numOfSmallChars;
+    int numOfBigChars;
+    int numOfNumbers;
+    char* password;
+};
 
 void Data_Input(vector<Product>& product, int number, int password) //Ввод данных, и заполнение полей экземпляра БД структуры Product
 {
@@ -592,13 +654,15 @@ int main(int argc, char* argv[])
 
 	srand(time(0)); // автоматическая рандомизация
 
-	int password = rand();
-	cout << endl << "Код для изменения данных: " << password << endl;
-
-
+	//int password = rand();
+	    PassGen* pass = new PassGen;
+	    pass->displayMessage();
+   	    ifstream f_in;
+            string filename = pass->filename,
+                   password;
+            f_in.open(filename+".txt", ios::in);
+            std::getline(f_in, password);
+            f_in.close();
+	    cout << endl << "Код для изменения данных: " << password << endl;
 	menu(product, number, password);
 }
-	
-
-
-
